@@ -15,6 +15,7 @@ public class PlayerDisplayNameView : NetworkBehaviour
     public void CmdChangeDisplayName(string newName)
     {
         displayName = newName;
+        playerDisplayName.text = displayName;
     }
 
     #endregion

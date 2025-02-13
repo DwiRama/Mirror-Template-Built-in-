@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class FXMirrorPlayerInstance : NetworkBehaviour
 {
+    public static NetworkIdentity localPlayer; //reference to client local player, can be access in local only
+
     [SyncVar(hook = "OnPlayerInstancePlayerNameChanged")] public string playerName;
     [SyncVar(hook = "OnPlayerInstanceAvatarIndexChanged")] public int avatarIndex;
     [SerializeField] private GameObject playerAvatarPrefab; // The prefab of player avatar to spawn to the world
 
     public event Action<string> OnPlayerChangedName; // Callback when playerName has changed
+    private ObjectSpawner spawner; // Reference to the ObjectSpawner
 
     #region Server
 
@@ -39,6 +42,7 @@ public class FXMirrorPlayerInstance : NetworkBehaviour
 
         // Spawn the object on all clients
         NetworkServer.Spawn(spawnedObject, connectionToClient);
+
     }
 
     /// <summary>
@@ -49,6 +53,18 @@ public class FXMirrorPlayerInstance : NetworkBehaviour
     public void CmdChangeAvatarIndex(int newAvatarIndex)
     {
         avatarIndex = newAvatarIndex;
+    }
+
+    // Command sent to the server from the player object
+    [Command]
+    void CmdRequestSpawn(Vector3 position)
+    {
+        if (spawner == null)
+        {
+            Debug.Log("Spawner not found");
+            return;
+        }
+        spawner.SpawnObject(position); // Call the spawner's method on the server
     }
 
     #endregion
@@ -62,6 +78,8 @@ public class FXMirrorPlayerInstance : NetworkBehaviour
     {
         base.OnStartLocalPlayer();
 
+        localPlayer = netIdentity;
+
         if (PlayerDataHandler.Instance != null)
         {
             CmdChangePlayerName(PlayerDataHandler.Instance.playerName); // Set Player Name based on offline scene input
@@ -73,6 +91,9 @@ public class FXMirrorPlayerInstance : NetworkBehaviour
         }
 
         SpawnPlayerAvatar(); // Spawn Player Avatar
+
+        //spawner = FindFirstObjectByType<ObjectSpawner>(); // Spawn interactable objects
+        //CmdRequestSpawn(new Vector3(2.926056f, 0, -18.00968f));
     }
 
     /// <summary>

@@ -12,10 +12,12 @@ public class FXMirrorPlayerAvatar : NetworkBehaviour
     [SerializeField] private ThirdPersonController tpController;
     [SerializeField] private StarterAssetsInputs assetsInputs;
     [SerializeField] private PlayerInput playerInput;
+    [SerializeField] private InteractionController interactionController;
     [SerializeField] private List<GameObject> avatars;
 
-    private CinemachineVirtualCamera player3POVCam;
     [SyncVar(hook = "OnAvatarIndexChanged")] public int avatarIndex;
+
+    private CinemachineVirtualCamera player3POVCam;
 
     #region Server
 
@@ -23,6 +25,7 @@ public class FXMirrorPlayerAvatar : NetworkBehaviour
     public void CmdChangeAvatarIndex(int newavatarIndex)
     {
         avatarIndex = newavatarIndex;
+        ShowAvatar();
     }
 
     #endregion
@@ -68,6 +71,20 @@ public class FXMirrorPlayerAvatar : NetworkBehaviour
             playerInput.enabled = true;
             Debug.Log("Enabled playerInput");
         }
+
+        // Set interaction
+        if (interactionController == null)
+        {
+            return;
+        }
+
+        interactionController.enabled = true;
+        interactionController.Setup(transform);
+
+        InteractionControllerView interactionView = FindAnyObjectByType<InteractionControllerView>();
+        interactionView.interactionController = interactionController;
+        interactionView.Setup();
+
     }
 
     public void OnAvatarIndexChanged(int oldValue, int newValue)
@@ -85,6 +102,7 @@ public class FXMirrorPlayerAvatar : NetworkBehaviour
         {
             DeactivateAllAvatars();
             avatars[avatarIndex].SetActive(true);
+            Debug.Log("Show avatar");
         }
     }
 
