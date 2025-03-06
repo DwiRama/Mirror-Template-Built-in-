@@ -11,7 +11,6 @@ public class FXMirrorPlayerInstance : NetworkBehaviour
     [SerializeField] private GameObject playerAvatarPrefab; // The prefab of player avatar to spawn to the world
 
     public event Action<string> OnPlayerChangedName; // Callback when playerName has changed
-    private ObjectSpawner spawner; // Reference to the ObjectSpawner
 
     #region Server
 
@@ -55,18 +54,6 @@ public class FXMirrorPlayerInstance : NetworkBehaviour
         avatarIndex = newAvatarIndex;
     }
 
-    // Command sent to the server from the player object
-    [Command]
-    void CmdRequestSpawn(Vector3 position)
-    {
-        if (spawner == null)
-        {
-            Debug.Log("Spawner not found");
-            return;
-        }
-        spawner.SpawnObject(position); // Call the spawner's method on the server
-    }
-
     #endregion
 
     #region Client
@@ -91,9 +78,6 @@ public class FXMirrorPlayerInstance : NetworkBehaviour
         }
 
         SpawnPlayerAvatar(); // Spawn Player Avatar
-
-        //spawner = FindFirstObjectByType<ObjectSpawner>(); // Spawn interactable objects
-        //CmdRequestSpawn(new Vector3(2.926056f, 0, -18.00968f));
     }
 
     /// <summary>

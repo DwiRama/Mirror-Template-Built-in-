@@ -8,19 +8,23 @@ using UnityEngine.InputSystem;
 
 public class FXMirrorPlayerAvatar : NetworkBehaviour
 {
-    [SerializeField] private Transform playerCameraRoot;
-    [SerializeField] private ThirdPersonController tpController;
-    [SerializeField] private StarterAssetsInputs assetsInputs;
-    [SerializeField] private PlayerInput playerInput;
-    [SerializeField] private InteractionController interactionController;
-    [SerializeField] private List<GameObject> avatars;
+    [SerializeField] private Transform playerCameraRoot; //Reference to transform where camera needs to follow
+    [SerializeField] private ThirdPersonController tpController; //Reference to thirdperson camera controller
+    [SerializeField] private StarterAssetsInputs assetsInputs; //Reference to input asset
+    [SerializeField] private PlayerInput playerInput; //Reference to player input
+    [SerializeField] private InteractionController interactionController; //Reference to interaction controller
+    [SerializeField] private List<GameObject> avatars; //List of avatar gameobject to be switch between
 
     [SyncVar(hook = "OnAvatarIndexChanged")] public int avatarIndex;
 
-    private CinemachineVirtualCamera player3POVCam;
+    private CinemachineVirtualCamera player3POVCam; //Reference to thirdperson cinemachine camera
 
     #region Server
 
+    /// <summary>
+    /// Client command to change the avatarIndex on the Server and also update the Avatar on the Server
+    /// </summary>
+    /// <param name="newavatarIndex"></param>
     [Command]
     public void CmdChangeAvatarIndex(int newavatarIndex)
     {
@@ -31,6 +35,9 @@ public class FXMirrorPlayerAvatar : NetworkBehaviour
     #endregion
 
     #region Client
+    /// <summary>
+    /// Initial setup when the avatar first spawn
+    /// </summary>
     public override void OnStartClient()
     {
         base.OnStartClient();
@@ -87,6 +94,9 @@ public class FXMirrorPlayerAvatar : NetworkBehaviour
 
     }
 
+    /// <summary>
+    /// Hook to change the avatar index, Hook method must have old and new value as parameters
+    /// </summary>
     public void OnAvatarIndexChanged(int oldValue, int newValue)
     {
         avatarIndex = newValue;
@@ -94,7 +104,7 @@ public class FXMirrorPlayerAvatar : NetworkBehaviour
     }
 
     /// <summary>
-    /// Show the character based on selected index
+    /// Show the avatar based on selected index
     /// </summary>
     private void ShowAvatar()
     {
@@ -107,7 +117,7 @@ public class FXMirrorPlayerAvatar : NetworkBehaviour
     }
 
     /// <summary>
-    /// Reset all character
+    /// Reset all avatar gameobject to inactive
     /// </summary>
     private void DeactivateAllAvatars()
     {
