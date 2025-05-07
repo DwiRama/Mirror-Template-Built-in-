@@ -9,16 +9,22 @@ public class FacingCamera : MonoBehaviour
 
     private void Start()
     {
-        // Cache the main camera transform for better performance
-        if (Camera.main != null)
-        {
-            mainCameraTransform = Camera.main.transform;
-        }
-        else
-        {
-            Debug.LogError("No Main Camera found. Ensure your camera has the 'MainCamera' tag.");
-        }
+        AssignMainCameraTransform();
     }
+
+    void AssignMainCameraTransform()
+    {
+		// Cache the main camera transform for better performance
+		if (Camera.main != null)
+		{
+			mainCameraTransform = Camera.main.transform;
+		}
+		else
+		{
+			Debug.LogError("No Main Camera found. Ensure your camera has the 'MainCamera' tag.");
+            Invoke("AssignMainCameraTransform", 0.5f);
+        }
+	}
 
     private void LateUpdate()
     {

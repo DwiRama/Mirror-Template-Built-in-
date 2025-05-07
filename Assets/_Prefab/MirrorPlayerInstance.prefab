@@ -48,7 +48,13 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  playerAvatarPrefab: {fileID: 6410927926845122698, guid: 359d47811292f2643a37f70d1fc56c05, type: 3}
+  playerName: 
+  avatarIndex: 0
+  vrMode: 0
+  playerAvatarPrefab: {fileID: 6410927926845122698, guid: 359d47811292f2643a37f70d1fc56c05,
+    type: 3}
+  playerVRAvatarPrefab: {fileID: 2896240441569705107, guid: 7dc940f51913e3047bbd022c5de9731d,
+    type: 3}
 --- !u!114 &-8856742315072971639
 MonoBehaviour:
   m_ObjectHideFlags: 0

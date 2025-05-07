@@ -1,26 +1,14 @@
-using Cinemachine;
 using Mirror;
-using StarterAssets;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-public class FXMirrorPlayerAvatar : NetworkBehaviour
+public abstract class FXMirrorPlayerAvatar : NetworkBehaviour
 {
-    [SerializeField] private Transform playerCameraRoot; //Reference to transform where camera needs to follow
-    [SerializeField] private ThirdPersonController tpController; //Reference to thirdperson camera controller
-    [SerializeField] private StarterAssetsInputs assetsInputs; //Reference to input asset
-    [SerializeField] private PlayerInput playerInput; //Reference to player input
     [SerializeField] private InteractionController interactionController; //Reference to interaction controller
     [SerializeField] private List<GameObject> avatars; //List of avatar gameobject to be switch between
-
     [SyncVar(hook = "OnAvatarIndexChanged")] public int avatarIndex;
 
-    private CinemachineVirtualCamera player3POVCam; //Reference to thirdperson cinemachine camera
-
     #region Server
-
     /// <summary>
     /// Client command to change the avatarIndex on the Server and also update the Avatar on the Server
     /// </summary>
@@ -31,7 +19,6 @@ public class FXMirrorPlayerAvatar : NetworkBehaviour
         avatarIndex = newavatarIndex;
         ShowAvatar();
     }
-
     #endregion
 
     #region Client
@@ -44,6 +31,7 @@ public class FXMirrorPlayerAvatar : NetworkBehaviour
 
         if (!isOwned)
         {
+            SetupOtherPlayer();
             Debug.Log($"{netIdentity.netId} Avatar: is not yours");
             return;
         }
@@ -53,31 +41,7 @@ public class FXMirrorPlayerAvatar : NetworkBehaviour
         ShowAvatar(); // Show local avatar
         CmdChangeAvatarIndex(avatarIndex); // Request to update server avatar
 
-        // Find Player Virtual Camera
-        GameObject vCamObj = GameObject.FindGameObjectWithTag("VCamThirdPOV");
-        player3POVCam = vCamObj.GetComponent<CinemachineVirtualCamera>();
-
-        // Set Camera Follow
-        player3POVCam.Follow = playerCameraRoot;
-        Debug.Log("Setup Camera follow");
-
-        if (tpController != null)
-        {
-            tpController.enabled = true;
-            Debug.Log("Enabled movementScript");
-        }
-
-        if (assetsInputs != null) 
-        {
-            assetsInputs.enabled = true;
-            Debug.Log("Enabled assetsInputs");
-        } 
-
-        if (playerInput != null)
-        {
-            playerInput.enabled = true;
-            Debug.Log("Enabled playerInput");
-        }
+		SetupPlayerPerMode();
 
         // Set interaction
         if (interactionController == null)
@@ -93,6 +57,16 @@ public class FXMirrorPlayerAvatar : NetworkBehaviour
         interactionView.Setup();
 
     }
+
+    /// <summary>
+    /// Override this function to setup your player per mode
+    /// </summary>
+    protected abstract void SetupPlayerPerMode();
+
+    /// <summary>
+    /// Override this function if you want doing something
+    /// </summary>
+    protected abstract void SetupOtherPlayer();
 
     /// <summary>
     /// Hook to change the avatar index, Hook method must have old and new value as parameters

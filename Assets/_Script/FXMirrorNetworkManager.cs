@@ -6,5 +6,4 @@ using UnityEngine;
 /// </summary>
 public class FXMirrorNetworkManager : NetworkManager
 {
-
 }

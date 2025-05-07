@@ -71,3 +71,19 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+
+# Project Assets
+/Assets/BNG Framework/Animation
+/Assets/BNG Framework/Documentation
+# /Assets/BNG Framework/Editor
+/Assets/BNG Framework/Fonts
+/Assets/BNG Framework/HandPoser
+# /Assets/BNG Framework/Input
+/Assets/BNG Framework/Integrations
+/Assets/BNG Framework/Materials
+/Assets/BNG Framework/Models
+/Assets/BNG Framework/Prefabs
+# /Assets/BNG Framework/Resources
+/Assets/BNG Framework/Scenes
+/Assets/BNG Framework/Sounds
+/Assets/BNG Framework/Textures
