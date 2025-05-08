@@ -19,3 +19,5 @@ public void ToggleGravity(bool gravityOn) {
 }
 ```
 2. Import [SteamVR Plugin package](https://assetstore.unity.com/packages/tools/integration/steamvr-plugin-32647) from Package Manager.
+3. Reassign your scene in the Build Setting because VRIF will overwrite it.
+4. Open **__Scene/Offline Scene** select **NetworkManager GameObject** if there is **NetworkManager** component other than **FXMirrorNetworkManager** please remove it.
