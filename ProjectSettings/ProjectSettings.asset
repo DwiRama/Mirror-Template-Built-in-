@@ -139,7 +139,7 @@ PlayerSettings:
   loadStoreDebugModeEnabled: 0
   visionOSBundleVersion: 1.0
   tvOSBundleVersion: 1.0
-  bundleVersion: 2.1.4
+  bundleVersion: 2.1.5
   preloadedAssets:
   - {fileID: 0}
   - {fileID: 0}
@@ -199,6 +199,8 @@ PlayerSettings:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: -8297111210154288567, guid: 74857ea5218276a48b32a49ed6775d1b, type: 2}
+  - {fileID: 5022435872559578772, guid: 3abfb51f3f8ca8a48b523c0f740d7973, type: 2}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -220,7 +222,7 @@ PlayerSettings:
   androidMaxAspectRatio: 2.4
   androidMinAspectRatio: 1
   applicationIdentifier:
-    Android: com.BeardedNinjaGames.VRInteractionFramework
+    Android: com.FXMedia.MirrorTemplate
     Standalone: com.FXMedia.Mirror-Template
   buildNumber:
     Standalone: 0
@@ -536,6 +538,9 @@ PlayerSettings:
   - serializedVersion: 3
     m_BuildTarget: WebGL
     m_Formats: 05000000
+  - serializedVersion: 3
+    m_BuildTarget: Android
+    m_Formats: 01000000
   playModeTestRunnerEnabled: 0
   runPlayModeTestAsEditModeTest: 0
   actionOnDotNetUnhandledException: 1
