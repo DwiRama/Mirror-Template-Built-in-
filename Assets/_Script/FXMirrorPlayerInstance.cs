@@ -8,12 +8,16 @@ public class FXMirrorPlayerInstance : NetworkBehaviour
 
     [SyncVar(hook = "OnPlayerInstancePlayerNameChanged")] public string playerName;
     [SyncVar(hook = "OnPlayerInstanceAvatarIndexChanged")] public int avatarIndex;
+    [SyncVar(hook = "OnPlayerInstanceVRModeChanged")] public bool vrMode;
     [SerializeField] private GameObject playerAvatarPrefab; // The prefab of player avatar to spawn to the world
+    [SerializeField] private GameObject playerVRAvatarPrefab; // The prefab of player avatar to spawn to the world
+
+    [SerializeField]
 
     public event Action<string> OnPlayerChangedName; // Callback when playerName has changed
 
-    #region Server
 
+    #region Server
     /// <summary>
     /// Request Server to change playerName
     /// </summary>
@@ -37,11 +41,10 @@ public class FXMirrorPlayerInstance : NetworkBehaviour
         Transform spawnPoint = NetworkManager.singleton.GetStartPosition();
 
         // Spawn Avatar on the server
-        GameObject spawnedObject = Instantiate(playerAvatarPrefab, spawnPoint.position, spawnPoint.rotation);
+        GameObject spawnedObject = Instantiate(!vrMode ? playerAvatarPrefab : playerVRAvatarPrefab, spawnPoint.position, spawnPoint.rotation);
 
         // Spawn the object on all clients
         NetworkServer.Spawn(spawnedObject, connectionToClient);
-
     }
 
     /// <summary>
@@ -54,10 +57,18 @@ public class FXMirrorPlayerInstance : NetworkBehaviour
         avatarIndex = newAvatarIndex;
     }
 
+    /// <summary>
+    /// Request Server to change the VRMode state
+    /// </summary>
+    /// <param name="newVrMode"></param>
+    [Command]
+    public void CmdChangeVRMode(bool newVrMode)
+    {
+        vrMode = newVrMode;
+    }
     #endregion
 
     #region Client
-
     /// <summary>
     /// Client local player OnStart
     /// </summary>
@@ -69,6 +80,7 @@ public class FXMirrorPlayerInstance : NetworkBehaviour
 
         if (PlayerDataHandler.Instance != null)
         {
+            CmdChangeVRMode(PlayerDataHandler.Instance.vrMode); // Set Player VRMode based on offline scene input
             CmdChangePlayerName(PlayerDataHandler.Instance.playerName); // Set Player Name based on offline scene input
             CmdChangeAvatarIndex(PlayerDataHandler.Instance.avatarIndex); // Set Player Index based on offline scene input
         }
@@ -111,5 +123,15 @@ public class FXMirrorPlayerInstance : NetworkBehaviour
     {
         avatarIndex = newValue;
     }
-    #endregion
+
+    /// <summary>
+    /// Hook called on client when vrMode change on the server
+    /// </summary>
+    /// <param name="oldValue">previous vrMode state</param>
+    /// <param name="newValue">new vrMode state</param>
+    public void OnPlayerInstanceVRModeChanged(bool oldValue, bool newValue)
+    {
+        vrMode = newValue;
+    }
+	#endregion
 }

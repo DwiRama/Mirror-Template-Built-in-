@@ -6,6 +6,7 @@ public class PlayerDataHandler : MonoBehaviour
 
     public string playerName;
     public int avatarIndex;
+    public bool vrMode;
 
     private void Awake()
     {

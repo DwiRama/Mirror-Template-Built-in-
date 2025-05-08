@@ -3,21 +3,19 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags:
-  - CinemachineTarget
-  - VCamThirdPOV
+  tags: []
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Post Processing
+  - Ground
   - Water
   - UI
-  - Interactable
   - 
   - 
-  - 
-  - 
+  - Restricted
+  - Player
+  - Grabbable
   - 
   - 
   - 
