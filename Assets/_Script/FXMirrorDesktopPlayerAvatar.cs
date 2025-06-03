@@ -27,12 +27,14 @@ public class FXMirrorDesktopPlayerAvatar : FXMirrorPlayerAvatar
 		player3POVCam.Follow = playerCameraRoot;
 		Debug.Log("Setup Camera follow");
 
+		// Set thirdperson controller
 		if (tpController != null)
 		{
 			tpController.enabled = true;
 			Debug.Log("Enabled movementScript");
 		}
 
+		// Set player controller input interface
 		if (assetsInputs != null)
 		{
 			assetsInputs.enabled = true;
@@ -41,10 +43,19 @@ public class FXMirrorDesktopPlayerAvatar : FXMirrorPlayerAvatar
 			UICanvasControllerInput uICanvasControllerInput = FindAnyObjectByType<UICanvasControllerInput>();
 			if (uICanvasControllerInput != null)
 			{
-				if ((Application.platform == RuntimePlatform.Android && !XRSettings.enabled) || Application.platform == RuntimePlatform.IPhonePlayer || Application.isEditor) 
-				{ 	
+				// Show mobile control if it's native mobile build or in editor
+				if ((Application.platform == RuntimePlatform.Android && !XRSettings.enabled) || Application.platform == RuntimePlatform.IPhonePlayer || Application.isEditor)
+				{
 					uICanvasControllerInput.gameObject.SetActive(true);
-				}
+                }
+				#if UNITY_WEBGL
+				// Show mobile control if it's web mobile build
+				else if (Application.platform == RuntimePlatform.WebGLPlayer)
+                {
+					if (WebMobileDetection.Instance.IsRunningOnMobile())
+						uICanvasControllerInput.gameObject.SetActive(true);
+                }
+				#endif
 				else
 				{
 					uICanvasControllerInput.gameObject.SetActive(false);

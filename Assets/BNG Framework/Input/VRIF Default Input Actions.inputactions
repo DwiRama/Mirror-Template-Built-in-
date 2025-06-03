@@ -183,7 +183,7 @@
                     "name": "Slow Time",
                     "type": "Button",
                     "id": "0a79676f-8968-4656-bfd8-e1605ca62d6a",
-                    "expectedControlType": "",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false

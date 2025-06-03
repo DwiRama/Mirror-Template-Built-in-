@@ -29,7 +29,7 @@ public class InteractionControllerView : MonoBehaviour
             interactionController.OnLookAt.RemoveListener(ShowInteractionPrompt);
             //interactionController.OnInteract.RemoveListener(HideInteractionPrompt);
             //interactionController.OnInteractionComplete.RemoveListener(HideInteractionPrompt);
-            interactionController.OnLookAway.RemoveListener(HideInteractionPrompt); // Subscribe here!
+            interactionController.OnLookAway.RemoveListener(HideInteractionPrompt);
         }
     }
 
@@ -57,10 +57,17 @@ public class InteractionControllerView : MonoBehaviour
     public void ShowInteractionPrompt(Interactable interactable)
     {
         interactionPrompt.SetActive(true);
-        //if (interactionText != null)
-        //{
-        //    interactionText.text = $"Press E to interact with {interactable.gameObject.name}";
-        //}
+        if (interactionText != null)
+        {
+            if (Application.platform != RuntimePlatform.WindowsPlayer)
+            {
+                interactionText.text = $"Press to interact";
+            }
+            else
+            {
+                interactionText.text = $"Press E to interact";
+            }
+        }
     }
 
     public void HideInteractionPrompt()

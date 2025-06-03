@@ -17,6 +17,7 @@ public class NetworkPanelView : MonoBehaviour
         inputField_networkAddress.text = networkManager.networkAddress;
 
         var transport = Transport.active as PortTransport;
+
         inputField_port.text = transport.Port.ToString();
     }
 

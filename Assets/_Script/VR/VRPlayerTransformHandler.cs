@@ -1,6 +1,8 @@
 using BNG;
 using UnityEngine;
-using Valve.VR;
+#if !UNITY_ANDROID
+//using Valve.VR;
+#endif
 
 public class VRPlayerTransformHandler : MonoBehaviour
 {
@@ -32,17 +34,19 @@ public class VRPlayerTransformHandler : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		//XButtonDown = SteamVR_Actions.vRIF_XButton.stateDown;
-		YButtonDown = SteamVR_Actions.vRIF_YButton.stateDown;
+        //XButtonDown = SteamVR_Actions.vRIF_XButton.stateDown;
+#if !UNITY_ANDROID
+		//YButtonDown = SteamVR_Actions.vRIF_YButton.stateDown;
+#endif
 
-		//if (XButtonDown)
-		//{
-		//	characterIKFollow.UpdateBasePlayerHeight(characterController.height);
-		//	characterIKFollow.AdjustPlayerScale();
-		//	return;
-		//}
+        //if (XButtonDown)
+        //{
+        //	characterIKFollow.UpdateBasePlayerHeight(characterController.height);
+        //	characterIKFollow.AdjustPlayerScale();
+        //	return;
+        //}
 
-		if (YButtonDown)
+        if (YButtonDown)
 		{
 			ToggleTransformPlayer();
 			return;

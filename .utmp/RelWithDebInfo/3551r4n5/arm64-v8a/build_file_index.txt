@@ -1,0 +1,2 @@
+D:\Projects\Unity\Mirror-Template-Built-in-\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\CMakeLists.txt
+D:\Projects\Unity\Mirror-Template-Built-in-\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\CMakeLists.txt

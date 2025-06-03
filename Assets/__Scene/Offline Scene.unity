@@ -552,7 +552,9 @@ GameObject:
   - component: {fileID: 366864118}
   - component: {fileID: 366864119}
   - component: {fileID: 366864121}
+  - component: {fileID: 366864122}
   - component: {fileID: 366864120}
+  - component: {fileID: 366864123}
   m_Layer: 0
   m_Name: NetworkManager
   m_TagString: Untagged
@@ -595,8 +597,8 @@ MonoBehaviour:
   offlineScene: Assets/__Scene/Offline Scene.unity
   onlineScene: Assets/__Scene/Online Demo Scene.unity
   offlineSceneLoadDelay: 0
-  transport: {fileID: 366864120}
-  networkAddress: 54.255.201.165
+  transport: {fileID: 366864122}
+  networkAddress: starwars-metaverse-mirror.fxwebapps.com
   maxConnections: 100
   disconnectInactiveConnections: 1
   disconnectInactiveTimeout: 60
@@ -607,8 +609,8 @@ MonoBehaviour:
   playerSpawnMethod: 0
   spawnPrefabs:
   - {fileID: 6410927926845122698, guid: 359d47811292f2643a37f70d1fc56c05, type: 3}
-  - {fileID: 5901169226714827039, guid: e297c36ca7314754bbb2009b089c8e82, type: 3}
   - {fileID: 2896240441569705107, guid: 7dc940f51913e3047bbd022c5de9731d, type: 3}
+  - {fileID: 5901169226714827039, guid: e297c36ca7314754bbb2009b089c8e82, type: 3}
   exceptionsDisconnect: 1
   snapshotSettings:
     bufferTimeMultiplier: 2
@@ -636,7 +638,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b0fecffa3f624585964b0d0eb21b18e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  port: 7789
+  port: 7790
   DualMode: 1
   NoDelay: 1
   Interval: 10
@@ -667,6 +669,51 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offsetX: 5
   offsetY: 5
+--- !u!114 &366864122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 366864117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 929e3234c7db540b899f00183fc2b1fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transports:
+  - {fileID: 366864120}
+  - {fileID: 366864123}
+--- !u!114 &366864123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 366864117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0110f245bfcfc7d459681f7bd9ebc590, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxMessageSize: 16384
+  maxHandshakeSize: 16384
+  serverMaxMsgsPerTick: 10000
+  clientMaxMsgsPerTick: 1000
+  sendTimeout: 5000
+  receiveTimeout: 20000
+  noDelay: 1
+  sslEnabled: 1
+  sslProtocols: 3072
+  sslCertJson: ./cert.json
+  port: 7791
+  batchSend: 1
+  waitBeforeSend: 1
+  clientUseWss: 1
+  clientWebsocketSettings:
+    ClientPortOption: 0
+    CustomClientPort: 7777
+  minimumLogLevel: 3
 --- !u!1 &574501429
 GameObject:
   m_ObjectHideFlags: 0
@@ -2322,7 +2369,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 10, y: 10}
+  m_AnchoredPosition: {x: 10, y: 35}
   m_SizeDelta: {x: 400, y: 240}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1339263710
@@ -3315,7 +3362,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 10, y: 260}
+  m_AnchoredPosition: {x: 10, y: 285.00003}
   m_SizeDelta: {x: 175, y: 60}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1737522827
@@ -4522,6 +4569,124 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f909e0c2c2b61a4bbc9e22c162ac1aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &4076124196399977751
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 8211789268503982800, guid: 62e640b0c28dc2a428ecd7e66818956c,
+        type: 3}
+      propertyPath: m_Pivot.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8211789268503982800, guid: 62e640b0c28dc2a428ecd7e66818956c,
+        type: 3}
+      propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8211789268503982800, guid: 62e640b0c28dc2a428ecd7e66818956c,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8211789268503982800, guid: 62e640b0c28dc2a428ecd7e66818956c,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8211789268503982800, guid: 62e640b0c28dc2a428ecd7e66818956c,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8211789268503982800, guid: 62e640b0c28dc2a428ecd7e66818956c,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8211789268503982800, guid: 62e640b0c28dc2a428ecd7e66818956c,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8211789268503982800, guid: 62e640b0c28dc2a428ecd7e66818956c,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8211789268503982800, guid: 62e640b0c28dc2a428ecd7e66818956c,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8211789268503982800, guid: 62e640b0c28dc2a428ecd7e66818956c,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8211789268503982800, guid: 62e640b0c28dc2a428ecd7e66818956c,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8211789268503982800, guid: 62e640b0c28dc2a428ecd7e66818956c,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8211789268503982800, guid: 62e640b0c28dc2a428ecd7e66818956c,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8211789268503982800, guid: 62e640b0c28dc2a428ecd7e66818956c,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8211789268503982800, guid: 62e640b0c28dc2a428ecd7e66818956c,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8211789268503982800, guid: 62e640b0c28dc2a428ecd7e66818956c,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8211789268503982800, guid: 62e640b0c28dc2a428ecd7e66818956c,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8211789268503982800, guid: 62e640b0c28dc2a428ecd7e66818956c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8211789268503982800, guid: 62e640b0c28dc2a428ecd7e66818956c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8211789268503982800, guid: 62e640b0c28dc2a428ecd7e66818956c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8624045358684531778, guid: 62e640b0c28dc2a428ecd7e66818956c,
+        type: 3}
+      propertyPath: m_Name
+      value: Canvas - Build Version
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 62e640b0c28dc2a428ecd7e66818956c, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -4531,5 +4696,6 @@ SceneRoots:
   - {fileID: 574501431}
   - {fileID: 366864118}
   - {fileID: 1136444122}
+  - {fileID: 4076124196399977751}
   - {fileID: 877820729}
   - {fileID: 414638144067653022}
