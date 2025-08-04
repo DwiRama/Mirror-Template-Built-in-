@@ -6,13 +6,11 @@ public class FXMirrorPlayerInstance : NetworkBehaviour
 {
     public static NetworkIdentity localPlayer; //reference to client local player, can be access in local only
 
-    [SyncVar(hook = "OnPlayerInstancePlayerNameChanged")] public string playerName;
-    [SyncVar(hook = "OnPlayerInstanceAvatarIndexChanged")] public int avatarIndex;
-    [SyncVar(hook = "OnPlayerInstanceVRModeChanged")] public bool vrMode;
+    [SyncVar(hook = nameof(OnPlayerInstancePlayerNameChanged))] public string playerName;
+    [SyncVar(hook = nameof(OnPlayerInstanceAvatarIndexChanged))] public int avatarIndex;
+    [SyncVar(hook = nameof(OnPlayerInstanceVRModeChanged))] public bool vrMode;
     [SerializeField] private GameObject playerAvatarPrefab; // The prefab of player avatar to spawn to the world
     [SerializeField] private GameObject playerVRAvatarPrefab; // The prefab of player avatar to spawn to the world
-
-    [SerializeField]
 
     public event Action<string> OnPlayerChangedName; // Callback when playerName has changed
 

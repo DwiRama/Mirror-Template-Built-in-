@@ -6,7 +6,7 @@ public abstract class FXMirrorPlayerAvatar : NetworkBehaviour
 {
     [SerializeField] private InteractionController interactionController; //Reference to interaction controller
     [SerializeField] private List<GameObject> avatars; //List of avatar gameobject to be switch between
-    [SyncVar(hook = "OnAvatarIndexChanged")] public int avatarIndex;
+    [SyncVar(hook = nameof(OnAvatarIndexChanged))] public int avatarIndex;
 
     #region Server
     /// <summary>
@@ -64,7 +64,7 @@ public abstract class FXMirrorPlayerAvatar : NetworkBehaviour
     protected abstract void SetupPlayerPerMode();
 
     /// <summary>
-    /// Override this function if you want doing something
+    /// Override this function if you want to do something for other player instances
     /// </summary>
     protected abstract void SetupOtherPlayer();
 

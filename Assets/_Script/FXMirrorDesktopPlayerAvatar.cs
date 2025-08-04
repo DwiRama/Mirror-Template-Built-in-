@@ -50,14 +50,13 @@ public class FXMirrorDesktopPlayerAvatar : FXMirrorPlayerAvatar
                 }
 				#if UNITY_WEBGL
 				// Show mobile control if it's web mobile build
-				else if (Application.platform == RuntimePlatform.WebGLPlayer)
+				else if (Application.platform == RuntimePlatform.WebGLPlayer && WebMobileDetection.Instance.IsRunningOnMobile())
                 {
-					if (WebMobileDetection.Instance.IsRunningOnMobile())
 						uICanvasControllerInput.gameObject.SetActive(true);
                 }
 				#endif
-				else
-				{
+                else
+                {
 					uICanvasControllerInput.gameObject.SetActive(false);
 				}
 

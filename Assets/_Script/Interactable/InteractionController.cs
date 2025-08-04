@@ -75,7 +75,7 @@ public class InteractionController : NetworkBehaviour
         {
             Interactable interactable = hit.collider.GetComponent<Interactable>();
 
-            if (interactable != null && interactable != currentInteractable)
+            if (interactable != null && interactable != currentInteractable && interactable.needUserInput)
             {
                 currentInteractable = interactable;
                 CmdRequestOnLook(currentInteractable.netId, FXMirrorPlayerInstance.localPlayer.netId);

@@ -12,6 +12,7 @@ public class Interactable : NetworkBehaviour
 
     [Header("Setting")]
     public bool waitforNotifyInteractionComplete = false;
+    public bool needUserInput = true;
 
     [Space(30)]
 
